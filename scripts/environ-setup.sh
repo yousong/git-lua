@@ -10,42 +10,42 @@ RELEASE_PAGE="$TOPDIR/release-page.html"
 RELEASE_INFO_LST="$TOPDIR/release-info.lst"
 
 __info() {
-	echo -e '\e[34;42m'"info: $1"'\e[0m' >&2
+    echo -e '\e[34;42m'"info: $1"'\e[0m' >&2
 }
 
 __error() {
-	echo -e '\e[37;41m'"error: $1"'\e[0m' >&2
+    echo -e '\e[37;41m'"error: $1"'\e[0m' >&2
 }
 
 update_release_info() {
-	wget -O "$RELEASE_PAGE" "$RELEASE_URL"
-	python "$SCRIPTS_DIR/extract-release-info.py" "$RELEASE_URL" "$RELEASE_PAGE"
+    wget -O "$RELEASE_PAGE" "$RELEASE_URL"
+    python "$SCRIPTS_DIR/extract-release-info.py" "$RELEASE_URL" "$RELEASE_PAGE"
 }
 
 fetch_version() {
-	local ver="$1"
-	local lst_line="$(cat "$RELEASE_INFO_LST" | grep "^$ver ")"
+    local ver="$1"
+    local lst_line="$(cat "$RELEASE_INFO_LST" | grep "^$ver ")"
 
-	[ -z "$lst_line" ] && {
-		__error "cannot find $ver in $RELEASE_INFO_LST."
-		return 1
-	}
+    [ -z "$lst_line" ] && {
+        __error "cannot find $ver in $RELEASE_INFO_LST."
+        return 1
+    }
 
-	local url="$(echo "$lst_line" | cut -d ' ' -f 5)"
-	local csum="$(echo "$lst_line" | cut -d ' ' -f 3)"
-	local fname="$(basename "$url")"
+    local url="$(echo "$lst_line" | cut -d ' ' -f 5)"
+    local csum="$(echo "$lst_line" | cut -d ' ' -f 3)"
+    local fname="$(basename "$url")"
 
-	(
-		cd "$TARBALLS_DIR";
-		wget -c "$url" || {
-			__error "download $url failed."
-			exit 1
-		};
-		echo "$csum $fname" | md5sum --check || {
-			__error "md5sum $fname failed."
-			exit 1
-		};
-	)
+    (
+        cd "$TARBALLS_DIR";
+        wget -c "$url" || {
+            __error "download $url failed."
+            exit 1
+        };
+        echo "$csum $fname" | md5sum --check || {
+            __error "md5sum $fname failed."
+            exit 1
+        };
+    )
 }
 
 import_version() {
