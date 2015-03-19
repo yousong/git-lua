@@ -20,6 +20,10 @@ All versions are tagged.
 	fetch_version lua-5.2.0
 	import_version lua-5.2.0
 
+	# check logs and tags
+	# push
+	git push --tags origin master
+
 ## TODO
 
 - Add infrastructure for building and testing.
