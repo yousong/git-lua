@@ -117,6 +117,7 @@ _import_all_versions() {
             __info "succeed importing $ver."
         } || {
             __error "failed importing $ver."
+            break
         }
     done
 }
@@ -130,6 +131,7 @@ _fetch_all_versions() {
             __info "succeed fetching $ver."
         } || {
             __error "failed fetching $ver."
+            break
         }
     done
 }
