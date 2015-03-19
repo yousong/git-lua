@@ -27,7 +27,7 @@ fetch_version() {
 	local lst_line="$(cat "$RELEASE_INFO_LST" | grep "^$ver ")"
 
 	[ -z "$lst_line" ] && {
-		__error "cannot find $ver in $RELEASE_INFO_LST." >&2
+		__error "cannot find $ver in $RELEASE_INFO_LST."
 		return 1
 	}
 
@@ -38,11 +38,11 @@ fetch_version() {
 	(
 		cd "$TARBALLS_DIR";
 		wget -c "$url" || {
-			__error "download $url failed." >&2
+			__error "download $url failed."
 			exit 1
 		};
 		echo "$csum $fname" | md5sum --check || {
-			__error "md5sum $fname failed." >&2
+			__error "md5sum $fname failed."
 			exit 1
 		};
 	)
@@ -58,20 +58,20 @@ import_version() {
 
     # balls are complete?
     [ -s "$fpath" ] || {
-        __error "cannot find non-empty file $fpath." >&2
+        __error "cannot find non-empty file $fpath."
         return 1
     }
 
     # already imported?
     git tag | grep --quiet --fixed-strings "$ver" && {
-        __error "$ver already imported" >&2
-        return 2
+        __error "$ver already imported"
+        return 0
     }
 
     # inflation okay?
     tar xzf "$fpath" -C "$_tmp_dir" || {
-        __error "tar xzf $fpath failed." >&2
-        return 2
+        __error "tar xzf $fpath failed."
+        return 1
     }
 
     # reset source directory okay?
@@ -83,24 +83,24 @@ import_version() {
         git rm -r "$SOURCE_DIR" && \
         rm -rf "$SOURCE_DIR" && \
         mkdir -p "$SOURCE_DIR" || {
-            __error "reset "$SOURCE_DIR" failed." >&2
-            return 2
+            __error "reset $SOURCE_DIR failed."
+            return 1
         }
     }
 
     # move okay?
     # -T is for treating DEST as a normal file.
     mv -T "$(find $_tmp_dir/ -type d -maxdepth 1 -mindepth 1)" "$SOURCE_DIR" || {
-        __error "move from $_tmp_dir/ to $SOURCE_DIR failed." >&2
-        return 3
+        __error "move from $_tmp_dir/ to $SOURCE_DIR failed."
+        return 1
     }
 
-    # add, commit, tag okay?
+    # git add, commit, tag okay?
     git add "$SOURCE_DIR" && \
         git commit -m "lua-source: import $ver." && \
         git tag "$ver" HEAD || {
-        __error "git {add,commit,tag} failed." >&2
-        return 3
+        __error "git {add,commit,tag} failed."
+        return 1
     }
 }
 
@@ -109,8 +109,11 @@ _import_all_versions() {
     local ver
 
     cat "$lst" | cut -f 1 -d ' ' | sort --numeric-sort | while read ver; do
-        __error "moving $ver" >&2
-        import_version "$ver"
+        import_version "$ver" && {
+            __info "succeed importing $ver."
+        } || {
+            __error "failed importing $ver."
+        }
     done
 }
 
@@ -119,7 +122,10 @@ _fetch_all_versions() {
     local ver
 
     cat "$lst" | cut -f 1 -d ' ' | sort --numeric-sort | while read ver; do
-        __error "fetching $ver" >&2
-        fetch_version "$ver"
+        fetch_version "$ver" && {
+            __info "succeed fetching $ver."
+        } || {
+            __error "failed fetching $ver."
+        }
     done
 }
