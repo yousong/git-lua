@@ -1,17 +1,28 @@
 A repository trying to record every available official version of Lua.
 
-How to use it.
-
-	. ./scripts/environ-setup.sh
-	fetch_version lua-5.2.0
-	import_version lua-5.2.0
-
 All versions are tagged.
 
 	git log --stat --summary --find-renames
 	git diff -p --stat --summary --find-renames lua-5.1.4 lua-5.1.5
 
 [Empty directories in source tarballs are not tracked in `lua-source/` directory.](https://git.wiki.kernel.org/index.php/GitFaq#Can_I_add_empty_directories.3F)
+
+## Maintenance
+
+	. ./scripts/environ-setup.sh
+
+	# fetch release info to local.
+	update_release_info
+	# check if anything interesting changed.
+	git diff
+
+	# do the update.
+	fetch_version lua-5.2.0
+	import_version lua-5.2.0
+
+## TODO
+
+- Add infrastructure for building and testing.
 
 ## Useful links.
 
