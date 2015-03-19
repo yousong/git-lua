@@ -53,9 +53,6 @@ import_version() {
     local fname="$1.tar.gz"
     local fpath="$TARBALLS_DIR/$fname"
 
-    rm -rf "$_tmp_dir" && \
-        mkdir -p "$_tmp_dir"
-
     # balls are complete?
     [ -s "$fpath" ] || {
         __error "cannot find non-empty file $fpath."
@@ -66,6 +63,13 @@ import_version() {
     git tag | grep --quiet --fixed-strings "$ver" && {
         __error "$ver already imported"
         return 0
+    }
+
+    # reset $_tmp_dir
+    rm -rf "$_tmp_dir" && \
+        mkdir -p "$_tmp_dir" || {
+        __error "reset $_tmp_dir failed."
+        return 1
     }
 
     # inflation okay?
