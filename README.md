@@ -34,7 +34,6 @@ All versions are tagged.
 
 - Lua Version History (with timeline and summary text on each major version), http://www.lua.org/versions.html
 - Lua manuals (available in HTML, PostScript, PDF formats), http://www.lua.org/manual/
-- Lua 5.3 中文文档（by [cloudwu/lua53doc](https://github.com/cloudwu/lua53doc)），http://cloudwu.github.io/lua53doc/
 
 ### Other efforts
 
@@ -49,3 +48,5 @@ All versions are tagged.
 [Tar archive frontend for git-fast-import](https://github.com/git/git/blob/master/contrib/fast-import/import-tars.perl)
 
 Just write another one for the current specific situation is faster than reading the code.
+
+[Lua 5.3 中文文档](http://cloudwu.github.io/lua53doc/), by [cloudwu](https://github.com/cloudwu/lua53doc)
