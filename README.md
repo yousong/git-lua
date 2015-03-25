@@ -34,6 +34,7 @@ All versions are tagged.
 
 - Lua Version History (with timeline and summary text on each major version), http://www.lua.org/versions.html
 - Lua manuals (available in HTML, PostScript, PDF formats), http://www.lua.org/manual/
+- Lua 5.3 中文文档（by [cloudwu/lua53doc](https://github.com/cloudwu/lua53doc)），http://cloudwu.github.io/lua53doc/
 
 ### Other efforts
 
