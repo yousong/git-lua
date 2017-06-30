@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 TOPDIR="$(pwd)"
 TARBALLS_DIR="$TOPDIR/tarballs"
 SOURCE_DIR="$TOPDIR/lua-source"
@@ -41,8 +43,8 @@ fetch_version() {
             __error "download $url failed."
             exit 1
         };
-        echo "$csum $fname" | md5sum --check || {
-            __error "md5sum $fname failed."
+        echo "$csum  $fname" | md5sum --check || {
+            __error "md5sum $fname failed: expecting $csum"
             exit 1
         };
     )
@@ -135,3 +137,24 @@ _fetch_all_versions() {
         }
     done
 }
+
+usage() {
+	cat >&2 <<"EOF"
+update_release_info
+
+	fetch download page and update files release-xxxx.*
+
+fetch_version lua-<version>
+
+	fetch tarball
+
+import_version lua-<version>
+
+	unpack tarball, create a commit and tag for this version
+
+git push --tags origin master
+EOF
+}
+
+[ "$#" -gt 0 ] || set -- usage
+"$@"

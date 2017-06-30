@@ -12,13 +12,14 @@ All versions are tagged.
 	. ./scripts/environ-setup.sh
 
 	# fetch release info to local.
-	update_release_info
+	./scripts/g update_release_info
+
 	# check if anything interesting changed.
-	git diff
+	git diff release-info.lst
 
 	# do the update.
-	fetch_version lua-5.2.0
-	import_version lua-5.2.0
+	./scripts/g fetch_version lua-5.2.0
+	./scripts/g import_version lua-5.2.0
 
 	# check logs and tags
 	# push
