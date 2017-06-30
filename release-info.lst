@@ -1,3 +1,7 @@
+lua-5.3.4 2017-01-12 53a9c68bcc0eda58bdc2095ad5cdfc63 79790cfd40e09ba796b01a571d4d63b52b1cd950 http://www.lua.org/ftp/lua-5.3.4.tar.gz
+lua-5.3.3 2016-05-30 703f75caa4fdf4a911c1a72e67a27498 a0341bc3d1415b814cc738b2ec01ae56045d64ef http://www.lua.org/ftp/lua-5.3.3.tar.gz
+lua-5.3.2 2015-11-25 33278c2ab5ee3c1a875be8d55c1ca2a1 7a47adef554fdca7d0c5536148de34579134a973 http://www.lua.org/ftp/lua-5.3.2.tar.gz
+lua-5.3.1 2015-06-10 797adacada8d85761c079390ff1d9961 1676c6a041d90b6982db8cef1e5fb26000ab6dee http://www.lua.org/ftp/lua-5.3.1.tar.gz
 lua-5.3.0 2015-01-06 a1b0a7e92d0c85bbff7a8d27bf29f8af 1c46d1c78c44039939e820126b86a6ae12dadfba http://www.lua.org/ftp/lua-5.3.0.tar.gz
 lua-5.2.4 2015-02-26 913fdb32207046b273fdb17aad70be13 ef15259421197e3d85b7d6e4871b8c26fd82c1cf http://www.lua.org/ftp/lua-5.2.4.tar.gz
 lua-5.2.3 2013-11-11 dc7f94ec6ff15c985d2d6ad0f1b35654 926b7907bc8d274e063d42804666b40a3f3c124c http://www.lua.org/ftp/lua-5.2.3.tar.gz
